@@ -5,6 +5,7 @@ var fs = require("fs");
 var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var request = require("request");
+const axios = require("axios");
 
 // gets the spotify key
 var spotify = new Spotify(keys.spotify);
@@ -40,16 +41,16 @@ function mySwitch(userInput) {
     }
 }
 
-// function for getting concert information - command is concer-this
+// function for getting concert information - command is concert-this
 function concert() {
-    var url = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    var url = "https://rest.bandsintown.com/artists/" + secondUserInput + "/events?app_id=codingbootcamp";
     axios.get(url)
         .then(function (response) {
             for (let i = 0; i < response.data.length; i++) {
                 console.log("----Concert Info----");
-                console.log("Name of the venue: " + response.data[i].venue.data);
-                console.log("Venue Location: " + response.data[i].venue.city + response.data[i].venue.country);
-                console.log("Date of the Event: " + response.data[i].venue.datetime);
+                console.log("Name of the venue: " + response.data[i].venue.name);
+                console.log("Venue Location: " + response.data[i].venue.city + " " + response.data[i].venue.country);
+                console.log("Date of the Event: " + response.data[i].datetime);
                 console.log("-----------");
 
             }

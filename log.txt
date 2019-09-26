@@ -16,3 +16,7 @@ spotify-this-song : dancinginthemoonlight+in+the+moonlight
 spotify-this-song : dancing
 spotify-this-song : dancinginthemoonlight+in+the+moonlight
 spotify-this-song : dancing in the moonlight+in+the+moonlight
+concert-this : clairo
+concert-this : clairo
+concert-this : clairo
+concert-this : clairo
