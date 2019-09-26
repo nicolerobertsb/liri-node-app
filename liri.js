@@ -16,9 +16,9 @@ for (let i = 4; i < process.argv.length; i++) {
     secondUserInput += "+" + process.argv[i];
 }
 
-var getArtistName = function (artist) {
-    return artist.name;
-}
+// var getArtistName = function (artist) {
+//     return artist.name;
+// }
 
 // funciton for searching spotify - the command is spotify-this-song
 var getSpotify = function (songName) {
@@ -29,7 +29,7 @@ var getSpotify = function (songName) {
         spotify.search(
             {
                 type: "track",
-                query: userCommand
+                query: secondUserInput
             },
             function (err, data) {
                 if (err) {
@@ -107,10 +107,14 @@ var getSpotify = function (songName) {
         function doWhat() {
             //Read random.txt file
             fs.readFile("random.txt", "utf8", function (error, data) {
-                if (!error);
+                if (error){
+                throw(error)
+                }
                 console.log(data.toString());
                 //split text with comma 
-                var cmds = data.toString().split(',');
+                userInput = data.toString().split(',')[0];
+                movieName = data.toString().split(',')[1];
+                mySwitch(userInput, secondUserInput);
             });
         }
     
