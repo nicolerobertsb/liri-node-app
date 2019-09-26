@@ -126,7 +126,7 @@ function getMovie() {
     });
 }
 
-// function for reading our text file
+// function for reading our text file - command is do-what-it-says
 function doWhat() {
     //Read random.txt file
     fs.readFile("random.txt", "utf8", function (error, data) {

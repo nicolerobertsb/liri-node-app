@@ -21,3 +21,8 @@ concert-this : clairo
 concert-this : clairo
 concert-this : clairo
 concert-this : clairo
+concert-this : clairo
+spotify-this-song : dancing in the dark+in+the+dark
+movie-this : titanic
+do-what-it-says : 
+spotify-this-song : The Ace
