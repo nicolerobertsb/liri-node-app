@@ -9,11 +9,6 @@ var request = require("request");
 // gets the spotify key
 var spotify = new Spotify(keys.spotify);
 
-// npm module used to write output to console and log.txt at the same time
-var log = require("simple-node-logger").createSimpleFileLogger(filename);
-log.setLevel("all");
-
-
 var userInput = process.argv[2];
 var secondUserInput = process.argv[3];
 
@@ -58,8 +53,8 @@ var getSpotify = function (songName) {
             });
         };
 
-        function mySwitch (userCommand){
-            switch (userCommand){
+        function mySwitch (userInput){
+            switch (userInput){
 
                 case "spotify-this-song":
                 getSpotify();
@@ -76,7 +71,7 @@ var getSpotify = function (songName) {
 
         function getMovie() {
             
-            var movieName = secondCommand;
+            var movieName = secondUserInput;
             // Then run a request to the OMDB API with the movie specified
             var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey=trilogy";
     
@@ -87,17 +82,15 @@ var getSpotify = function (songName) {
                     var body = JSON.parse(body);
     
                     //Simultaneously output to console and log.txt via NPM simple-node-logger
-                    logOutput('----Movie Info----');
-                    logOutput("Title: " + body.Title);
-                    logOutput("Release Year: " + body.Year);
-                    logOutput("IMdB Rating: " + body.imdbRating);
-                    logOutput("Country: " + body.Country);
-                    logOutput("Language: " + body.Language);
-                    logOutput("Plot: " + body.Plot);
-                    logOutput("Actors: " + body.Actors);
-                    logOutput("Rotten Tomatoes Rating: " + body.Ratings[2].Value);
-                    logOutput("Rotten Tomatoes URL: " + body.tomatoURL);
-                    logOutput('-------------');
+                    console.log('----Movie Info----');
+                    console.log("Title: " + body.Title);
+                    console.log("Release Year: " + body.Year);
+                    console.log("IMDB Rating: " + body.imdbRating);
+                    console.log("Country: " + body.Country);
+                    console.log("Language: " + body.Language);
+                    console.log("Plot: " + body.Plot);
+                    console.log("Actors: " + body.Actors);
+                    console.log('-------------');
     
                 } else {
                     //else - throw error
@@ -116,11 +109,11 @@ var getSpotify = function (songName) {
             fs.readFile("random.txt", "utf8", function (error, data) {
                 if (!error);
                 console.log(data.toString());
-                //split text with comma delimiter
+                //split text with comma 
                 var cmds = data.toString().split(',');
             });
         }
     
     }
 
-        mySwitch(userCommand);
+        mySwitch(userInput);
