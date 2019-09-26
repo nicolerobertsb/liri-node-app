@@ -10,13 +10,11 @@ var request = require("request");
 var spotify = new Spotify(keys.spotify);
 
 var userInput = process.argv[2];
-var secondUserInput = process.argv[3];
+var secondUserInput = process.argv.slice(3).join(' ');
 
 for (let i = 4; i < process.argv.length; i++) {
     secondUserInput += "+" + process.argv[i];
 }
-
-
 
 function mySwitch(userInput) {
     switch (userInput) {
@@ -58,43 +56,37 @@ function concert() {
         })
 }
 
-var getArtistName = function (artist) {
-    return artist.name;
-}
 // funciton for searching spotify - the command is spotify-this-song
 
-function getSpotify(songName) {
+function getSpotify() {
 
-    if (songName === undefined) {
-        songName = "The Ace";
+    if (!secondUserInput) {
+        secondUserInput = "The Ace";
     }
 
-    spotify.search({
+    spotify
+        .search({
             type: "track",
             query: secondUserInput
-        },
-        function (err, data) {
-            if (err) {
-                console.log("Error ocurred: " + err);
-                return;
+        })
+        .then(function (data) {
+            var artists = [];
+
+            for (let i = 0; i < data.tracks.items[0].artists.length; i++) {
+                artists.push(data.tracks.items[0].artists[i].name)
             }
 
-            var songs = data.tracks.items;
-            console.log(songs);
-
-
-            for (let i = 0; i < songs.length; i++) {
-                console.log(i);
-                console.log("Artist(s): " + songs[i].artists.map(getArtistNames));
-                console.log("Song name: " + songs[i].name);
-                console.log("Preview song: " + songs[i].preview_url);
-                console.log("Album: " + songs[i].album.name);
-                console.log("-----------------------------------");
-
-            }
+            console.log("-----------------------------------");
+            console.log("Artist(s): " + artists);
+            console.log("Song name: " + data.tracks.items[0].name);
+            console.log("Preview song: " + data.tracks.items[0].preview_url);
+            console.log("Album: " + data.tracks.items[0].album.name);
+            console.log("-----------------------------------");
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-};
-
+}
 // funcion for searching movie data base - command is movie-this
 function getMovie() {
 
@@ -150,7 +142,7 @@ function doWhat() {
 mySwitch(userInput);
 
 function saveInfo() {
-    fs.appendFile("log.txt", userInput + " : " + name + "\n", function (error) {
+    fs.appendFile("log.txt", userInput + " : " + secondUserInput + "\n", function (error) {
         if (error) {
             throw error;
         }
