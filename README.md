@@ -1,12 +1,11 @@
-# liri-node-app
+# Project: LIRI Bot
 
-Project: LIRI Bot
 LIRI is a Language Interpretation and Recognition Interface.
 
-Overview
+* Overview
 LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI is a command line node app that takes in parameters and gives data in return.
 
-Challenge
+* Challenge
 Use Node JS to create a LIRI bot, like iPhone's SIRI, but takes in commands through Language vs Speech using the following commands:
 
 concert-this
@@ -18,7 +17,7 @@ movie-this
 do-what-it-says
 
 
-Purpose of the Project:
+* Purpose of the Project:
 The purpose of this project is teach and demonstrate the use of javaScript for back-end server use.
 
 
@@ -34,8 +33,6 @@ Node-Spotify-API (https://www.npmjs.com/package/node-spotify-api)
 Axios (https://www.npmjs.com/package/axios)
 Moment (https://www.npmjs.com/package/moment)
 DotEnv (https://www.npmjs.com/package/dotenv)
-
-
 
 
 
