@@ -16,37 +16,53 @@ for (let i = 4; i < process.argv.length; i++) {
     secondUserInput += "+" + process.argv[i];
 }
 
-// var getArtistName = function (artist) {
-//     return artist.name;
-// }
 
 
 function mySwitch(userInput) {
     switch (userInput) {
         case "concert-this":
             concert();
+            saveInfo();
             break;
 
         case "spotify-this-song":
             getSpotify();
+            saveInfo();
             break;
 
         case "movie-this":
             getMovie();
+            saveInfo();
             break;
 
         case "do-what-it-says":
             doWhat();
+            saveInfo();
             break;
     }
 }
 
 // function for getting concert information - command is concer-this
 function concert() {
+    var url = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    axios.get(url)
+        .then(function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+                console.log("----Concert Info----");
+                console.log("Name of the venue: " + response.data[i].venue.data);
+                console.log("Venue Location: " + response.data[i].venue.city + response.data[i].venue.country);
+                console.log("Date of the Event: " + response.data[i].venue.datetime);
+                console.log("-----------");
 
+            }
+        })
 }
 
+var getArtistName = function (artist) {
+    return artist.name;
+}
 // funciton for searching spotify - the command is spotify-this-song
+
 function getSpotify(songName) {
 
     if (songName === undefined) {
@@ -131,6 +147,13 @@ function doWhat() {
     });
 }
 
-
-
 mySwitch(userInput);
+
+function saveInfo() {
+    fs.appendFile("log.txt", userInput + " : " + name + "\n", function (error) {
+        if (error) {
+            throw error;
+        }
+        console.log("Saved.");
+    })
+}
